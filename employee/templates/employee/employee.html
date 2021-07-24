@@ -1,59 +1,59 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}
 Employee
 {% endblock  %}
 
-{% block content %}
-    <header>
-    <div class="px-3 py-2 bg-dark text-white">
-      <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-          </a>
+{% block css_files %}
+   <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
+{% endblock  %}
 
-          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-            <li>
-              <a href="#" class="nav-link text-secondary">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
-                Orders
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
-                Products
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
-                Customers
-              </a>
-            </li>
-          </ul>
+{% block content %}
+  <div class="container-fluid p-4">
+    <h1 class="display-3 pb-4 text-center">Welcome {{user|title}}!</h1>
+
+    <div class="row mb-3">
+      <div class="col-2"></div>
+      <div class="col-4 user">
+         <a href="" class="option">
+            <div class="card text-center p-4" style="width:31vw">
+                <img src="{% static 'employee/images/user.svg' %}"  class="card-img-top" alt="User">
         </div>
+       </a>
       </div>
-    </div>
-    <div class="px-3 py-2 border-bottom mb-3">
-      <div class="container d-flex flex-wrap justify-content-end">
-        <div class="text-center">
-          <a href="" class="btn btn-primary">Log Out</a>
+
+      <div class="col-4 car">
+         <a href="" class="option">
+            <div class="card text-center p-4" style="width:31vw">
+                <img src="{% static 'employee/images/car.svg' %}"  class="card-img-top" alt="Car">
         </div>
+       </a>
       </div>
+
+ <div class="col-2"></div>
     </div>
-  </header>
+
+
+
+    <div class="row mb-3">
+      <div class="col-2"></div>
+      <div class="col-4 accident">
+         <a href="" class="option">
+            <div class="card text-center p-4" style="width:31vw">
+                <img src="{% static 'employee/images/accident.svg' %}"  class="card-img-top" alt="Accident">
+        </div>
+       </a>
+      </div>
+
+      <div class="col-4 fuel">
+         <a href="" class="option">
+            <div class="card text-center p-4" style="width:31vw">
+                <img src="{% static 'employee/images/fuel.svg' %}"  class="card-img-top" alt="Fuel">
+        </div>
+       </a>
+      </div>
+
+ <div class="col-2"></div>
+    </div>
+  </div>
 {% endblock  %}
