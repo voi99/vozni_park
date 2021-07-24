@@ -1,0 +1,14 @@
+.card:hover,
+.card:active {
+  transform: scale(1.03);
+  background-color: rgb(219, 238, 245);
+  color: white;
+  cursor: pointer;
+}
+
+.errorlist {
+  list-style: none;
+  margin: 0.5rem 0;
+  padding: 0;
+  color: red;
+}

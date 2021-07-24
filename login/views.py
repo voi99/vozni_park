@@ -1,0 +1,32 @@
+from django.core.exceptions import ValidationError
+from django.shortcuts import redirect, render
+from django.views import View
+from django.contrib.auth import authenticate,login, logout
+from .forms import LoginForm
+
+# Create your views here.
+
+class ChooseLoginView(View):
+    def get(self, request):
+        return render(request,"login/choose_login.html")
+
+
+def login_view(request):
+    form = LoginForm(request.POST or None)
+    w_pass =""
+    if form.is_valid():
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password")
+        user = authenticate(request,username=username,password=password)
+        
+        if user is not None:
+            login(request,user)
+            return redirect('employee')
+        else:
+           w_pass = "Wrong Password!"
+
+    return render(request,"login/login.html",{"form":form,"w_pass":w_pass})
+
+def logout_view(request):
+    logout(request)
+    return redirect("/")

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Choose Login Method
+{% endblock  %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'login/css/login.css' %}">
+{% endblock  %}
+
+{% block content %}
+<div class="container-fluid p-4">
+       <h1 class="display-3 text-center pb-4 ">Choose Your Login Method</h1>
+
+    <div class="row">
+     <div class="col-2"></div>
+        <div class="col-4">
+         <a href="{% url 'employee-login' %}" class="option">
+            <div class="card text-center p-2" style="width:30vw">
+                <img src="{% static 'login/images/employee.svg' %}"  class="card-img-top" alt="Employee">
+            <div class="card-body pt-4">
+                <a href="{% url 'employee-login' %}" class="btn btn-primary">Employee</a>
+            </div>
+        </div>
+       </a>
+    </div>
+        <div class="col-4">
+        <a href="admin/">
+            <div class="card text-center p-2" style="width:30vw">
+                <img src="{% static 'login/images/admin.svg' %}"  class="card-img-top" alt="Admin">
+            <div class="card-body pt-4">
+                <a href="admin/" class="btn btn-primary">Admin</a>
+            </div>
+            </div>
+        </a>
+        </div>
+        <div class="col-2"></div>
+        </div>
+    </div>
+
+</div>
+{% endblock  %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Employee Login Page
+{% endblock  %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
+{% endblock  %}
+
+{% block content %}
+        <div class="container pt-3">
+        <h1 class="display-2 text-center">Employee Login</h1>
+            <form method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="mb-3">
+                    {{field.label_tag}}
+                    {{field}}
+                     </div>
+                    {{field.errors}}
+                {% endfor %}
+                <div class="mb-3 mt-n2 errorlist">{{w_pass}}</div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+{% endblock  %}
