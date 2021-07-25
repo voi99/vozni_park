@@ -9,11 +9,32 @@ Employee
 {% endblock  %}
 
 {% block content %}
-    {{employee.first_name}}
-    {{employee.last_name}}
-    {{employee.address}}
-    {% for category in employee.categories.all %}
-        ({{category}})
-    {% endfor %}
-    {{employee.vehicle}}
+    <div class="container p-4">
+        <h1 class="display-3 text-center">{{employee.first_name}} {{employee.last_name}}</h1>
+
+        <h1 class="dispaly-6">
+            Your Address:
+        </h1>
+
+        <p class="ps-2 lead">{{employee.address}}</p>
+
+        <h1 class="display-6">
+            Your Licence Categories:
+        </h1>
+        <ul>
+        {% for category in employee.categories.all %}
+            <li>{{category}}</li>
+        {% endfor %}
+        </ul>
+
+          <h1 class="display-6">
+            Your Vehicle:
+        </h1>
+        
+        <a href=""><p class="ps-2 lead">{{employee.vehicle.model_name}}</p></a>
+
+        
+    </div>
+
+    
 {% endblock  %}

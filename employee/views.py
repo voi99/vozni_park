@@ -13,13 +13,16 @@ class EmployeeView(View):
     def get(self, request):
         user = request.user
         employee_slug = request.session.get('employee_slug')
+        vehicle_slug = request.session.get('employee_vehicle')
        
         return render(request,"employee/employee.html",{
             "user":user,
-            "employee_slug":employee_slug
+            "employee_slug":employee_slug,
+            "vehicle_slug":vehicle_slug
         })
 
 class EmployeeInfoView(View):
+    @method_decorator(login_required(login_url='/'))
     def get(self,request,slug):
         employee = Employee.objects.get(slug=slug)
         print(employee)

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'location_field.apps.DefaultConfig',
 ]
 
 MIDDLEWARE = [
@@ -86,9 +87,9 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
-    },
-    'OPTIONS':{
-        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        'OPTIONS':{
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
     }
 }
 
@@ -141,3 +142,12 @@ STATICFILES_DIRS = [
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+LOCATION_FIELD = {
+    'map.provider': 'google',
+    'search.provider': 'google',
+    'provider.google.api': '//maps.google.com/maps/api/js',
+    'provider.google.api_key': 'AIzaSyDHvKEYbD4EizRmlfhJmlqcXbLQa1143jQ',
+    'provider.google.api_libraries': '',
+    'provider.google.map.type': 'ROADMAP',
+}

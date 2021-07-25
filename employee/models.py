@@ -12,7 +12,7 @@ class Employee(models.Model):
     last_name = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
     categories = models.ManyToManyField('vehicle.Category')
-    vehicle = models.OneToOneField('vehicle.Vehicle',on_delete=CASCADE)
+    vehicle = models.OneToOneField('vehicle.Vehicle',on_delete=CASCADE,null=True)
     slug = models.SlugField(default="",null=False,db_index=True)
 
     def __str__(self):
