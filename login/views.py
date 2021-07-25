@@ -1,3 +1,4 @@
+from employee.models import Employee
 from django.core.exceptions import ValidationError
 from django.shortcuts import redirect, render
 from django.views import View
@@ -21,6 +22,9 @@ def login_view(request):
         
         if user is not None:
             login(request,user)
+            emp = Employee.objects.get(user=user)
+            request.session['employee_id'] = emp.id
+            request.session['employee_slug'] = emp.slug
             return redirect('employee')
         else:
            w_pass = "Wrong Password!"

@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from employee.models import Employee
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
@@ -12,9 +12,17 @@ class EmployeeView(View):
     @method_decorator(login_required(login_url='/'))
     def get(self, request):
         user = request.user
+        employee_slug = request.session.get('employee_slug')
+       
         return render(request,"employee/employee.html",{
-            "user":user
+            "user":user,
+            "employee_slug":employee_slug
         })
 
-class UserView(View):
-    pass
+class EmployeeInfoView(View):
+    def get(self,request,slug):
+        employee = Employee.objects.get(slug=slug)
+        print(employee)
+        return render(request,"employee/employee-info.html",{
+            "employee":employee
+        })

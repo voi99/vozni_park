@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Employee
+{% endblock  %}
+
+{% block css_files %}
+   <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
+{% endblock  %}
+
+{% block content %}
+    {{employee.first_name}}
+    {{employee.last_name}}
+    {{employee.address}}
+    {% for category in employee.categories.all %}
+        ({{category}})
+    {% endfor %}
+    {{employee.vehicle}}
+{% endblock  %}
