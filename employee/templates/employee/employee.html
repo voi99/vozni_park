@@ -10,7 +10,10 @@ Employee
 
 {% block content %}
   <div class="container-fluid p-4">
-    <h1 class="display-3 pb-4 text-center">Welcome {{user|title}}!</h1>
+<a href="{% url 'logout' %}"class="btn btn-primary" style="position:fixed;bottom:3;right:3;">Log Out</a>
+
+      <h1 class="display-3 text-center">Welcome {{user|title}}!</h1>
+
 
     <div class="row mb-3">
       <div class="col-2"></div>
@@ -30,7 +33,8 @@ Employee
        </a>
       </div>
 
- <div class="col-2"></div>
+ <div class="col-2 text-center">
+ </div>
     </div>
 
 
@@ -38,7 +42,7 @@ Employee
     <div class="row mb-3">
       <div class="col-2"></div>
       <div class="col-4 accident">
-         <a href="" class="option">
+         <a href="{% url 'add-accident' %}" class="option">
             <div class="card text-center p-4" style="width:31vw">
                 <img src="{% static 'employee/images/accident.svg' %}"  class="card-img-top" alt="Accident">
         </div>

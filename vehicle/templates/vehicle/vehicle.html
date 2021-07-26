@@ -5,8 +5,31 @@ Your Vehicle | {{vehicle.model_name}}
 {% endblock  %}
 
 {% block content %}
-<div id="googleMap" style="width:100%;height:400px;"></div>
+<div class="container p-3">
+  <h1 class="display-3 text-center">{{vehicle.model_name}}</h1>
+  
+  <div class="mx-auto"style="width:80%">
 
+  <h1 class="display-6">Brand</h1>
+  <p class="ps-1 lead">{{vehicle.brand}}</p>
+
+  <h1 class="display-6">Year Of Manufacture</h1>
+  <p class="ps-1 lead">{{vehicle.year}}</p>
+  
+  <h1 class="display-6">Category</h1>
+  <p class="ps-1 lead">{{vehicle.category}}</p>
+
+  <h1 class="display-6">Color</h1>
+  <p class="ps-1 lead">{{vehicle.color}}</p>
+
+  <h1 class="display-6">Last Registration</h1>
+  <p class="ps-1 lead">{{vehicle.last_registration}}</p>
+
+
+  <h1 class="pt-3 display-6">Your vehicle garage</h1>
+  <div class="rounded-3"id="googleMap" style="height:40vh;"></div>
+  </div>
+</div>
 
 <input type="hidden" value="{{vehicle_cor1}}" id='cor-1'>
 <input type="hidden" value="{{vehicle_cor2}}" id='cor-2'>

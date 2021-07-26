@@ -1,5 +1,5 @@
-from vehicle.models import Vehicle
 from django.contrib import admin
+from .models import Accident
 
 # Register your models here.
 
@@ -10,5 +10,9 @@ class EmployeeAdmin(admin.ModelAdmin):
     list_display = ("first_name","last_name","vehicle",)
     list_filter = ("categories",)
 
+class AccidentAdmin(admin.ModelAdmin):
+    list_display = ("employee","vehicle","date",)
+
 
 admin.site.register(Employee,EmployeeAdmin)
+admin.site.register(Accident,AccidentAdmin)

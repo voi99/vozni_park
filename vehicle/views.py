@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from .models import Vehicle
+
 # Create your views here.
 
 class VehicleInfo(View):
@@ -15,3 +16,4 @@ class VehicleInfo(View):
             "vehicle_cor1":vehicle_cor1,
             "vehicle_cor2":vehicle_cor2
         })
+

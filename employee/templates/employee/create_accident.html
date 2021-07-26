@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add | Accident
+{% endblock  %}
+
+
+{% block content %}
+<div class="container p-3">
+    <h1 class="display-3 text-center">Add Accident</h1>
+<form action="/employee/add-accident" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+    {{form}}
+    <button class="btn btn-primary">Add Accident</button>
+  </form>
+</div>
+{% endblock  %}

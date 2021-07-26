@@ -11,6 +11,14 @@ Choose Login Method
 {% endblock  %}
 
 {% block content %}
+{% if user.is_authenticated %}
+<div class="container pt-3">
+            <h1 class="display-2 text-center">You are already Logged In!</h1>
+            <div class="text-center p-3">
+            <a href="{% if user.is_staff %}/admin{% else %}/employee{%endif%}" class="btn btn-primary">Go to Your Account</a>
+            </div>
+</div>
+{% else %}
 <div class="container-fluid p-4">
        <h1 class="display-3 text-center pb-4">Choose Your Login Method</h1>
 
@@ -41,4 +49,5 @@ Choose Login Method
     </div>
 
 </div>
+{% endif %}
 {% endblock  %}

@@ -12,7 +12,7 @@ Employee
     <div class="container p-4">
         <h1 class="display-3 text-center">{{employee.first_name}} {{employee.last_name}}</h1>
 
-        <h1 class="dispaly-6">
+        <h1 class="display-6">
             Your Address:
         </h1>
 
@@ -27,12 +27,16 @@ Employee
         {% endfor %}
         </ul>
 
-          <h1 class="display-6">
+        <h1 class="display-6">
             Your Vehicle:
         </h1>
         
-        <a href=""><p class="ps-2 lead">{{employee.vehicle.model_name}}</p></a>
+        <a href="{% url 'vehicle' vehicle_slug %}"><p class="ps-2 lead">{{employee.vehicle.model_name}}</p></a>
 
+        <h1 class="display-6">Your Accidents:</h1>
+            {% for accident in employee.employee_accidents.all %}
+                <li>{{accident}}</li>
+            {% endfor %}
         
     </div>
 

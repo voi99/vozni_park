@@ -10,6 +10,12 @@
 
 {% block content %}
         <div class="container pt-3">
+        {% if user.is_authenticated %}
+            <h1 class="display-2 text-center">You are already Logged In!</h1>
+            <div class="text-center p-3">
+            <a href="/employee" class="btn btn-primary">Go to Your Account</a>
+            </div>
+        {% else %}
         <h1 class="display-2 text-center">Employee Login</h1>
             <form method="POST">
                 {% csrf_token %}
@@ -23,5 +29,6 @@
                 <div class="mb-3 mt-n2 errorlist">{{w_pass}}</div>
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
+         {% endif %}
         </div>
 {% endblock  %}

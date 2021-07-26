@@ -3,6 +3,7 @@ from django.core.validators import MinValueValidator,MaxValueValidator
 import datetime
 from location_field.models.plain import PlainLocationField
 
+
 #from django.utils.text import slugify
 
 # Create your models here.
@@ -35,12 +36,12 @@ class Vehicle(models.Model):
     last_registration = models.DateField()
     slug = models.SlugField(default="",null=False,db_index=True)
     garage = models.CharField(max_length=255)
-    location = PlainLocationField(based_fields=['garage'],zoom=7)
+    location = PlainLocationField(based_fields=['garage'],zoom=100)
 
     # def save(self,*args, **kwargs):
     #     self.slug = slugify(self.model_name)
     #     super().save()
     
     def __str__(self):
-        return f"{self.model_name} ({self.category}) - {self.brand}"
+        return f"{self.model_name} ({self.category})"
      
