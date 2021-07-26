@@ -12,3 +12,13 @@
   padding: 0;
   color: red;
 }
+
+#map_location{
+  width: 100% !important;
+  height: 50vh !important;
+}
+
+#_GMapContainer{
+  width: 100% !important;
+  height: 50vh !important;
+}

@@ -25,6 +25,7 @@ def login_view(request):
             emp = Employee.objects.get(user=user)
             request.session['employee_id'] = emp.id
             request.session['employee_slug'] = emp.slug
+            request.session['employee_vehicle_id'] = emp.vehicle.id
             request.session['employee_vehicle'] = emp.vehicle.slug
             return redirect('employee')
         else:

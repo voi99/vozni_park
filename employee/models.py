@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from location_field.models.plain import PlainLocationField
 from vehicle.models import Vehicle
 
+
 # Create your models here.
 
 class Employee(models.Model):
@@ -22,7 +23,7 @@ class Accident(models.Model):
     employee = models.ForeignKey(Employee,on_delete=models.CASCADE,related_name="employee_accidents")
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name="vehicle_accidents")
     city = models.CharField(max_length=100)
-    location = PlainLocationField(zoom=7)
+    location = PlainLocationField(based_fields=['city'],zoom=7)
     image = models.ImageField(upload_to='images')
     date = models.DateField()
     
