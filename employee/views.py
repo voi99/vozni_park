@@ -1,4 +1,5 @@
-from .models import Employee,Accident
+from .models import Employee
+from vehicle.models import Vehicle
 from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from django.views import View
@@ -41,30 +42,21 @@ class EmployeeInfoView(View):
 class CreateAccidentView(View):
     def get(self, request, *args, **kwargs):
         form = AccidentForm()
-        employee = self.request.session.get('employee_id')
-        vehicle = self.request.session.get('employee_vehicle_id')
-        form.fields['employee'].initial = employee
-        form.fields['employee'].disabled = True
-        form.fields['vehicle'].initial = vehicle
-        form.fields['vehicle'].disabled = True
 
         return render(request,"employee/create_accident.html",{
             "form":form,
-            "employee":employee,
-            "vehicle":vehicle
         })
 
     def post(self, request, *args, **kwargs):
         form = AccidentForm(request.POST,request.FILES)
-        employee = self.request.session.get('employee_id')
-        vehicle = self.request.session.get('employee_vehicle_id')
-        form.fields['employee'].initial = employee
-        form.fields['employee'].disabled = True
-        form.fields['vehicle'].initial = vehicle
-        form.fields['vehicle'].disabled = True
+        employee = request.session.get('employee_id')
+        vehicle = request.session.get('employee_vehicle_id')
         
         if form.is_valid():
-            form.save()
+            form_new = form.save(commit=False)
+            form_new.employee = Employee.objects.get(pk=employee)
+            form_new.vehicle = Vehicle.objects.get(pk=vehicle)
+            form_new.save()
             return redirect('/employee')
         
         return render(request,"employee/create_accident.html",{
