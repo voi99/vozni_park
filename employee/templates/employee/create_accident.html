@@ -8,12 +8,14 @@ Add | Accident
 {% endblock  %}
 
 {% block css_files %}
- <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
+ <link rel="stylesheet" href="{% static 'login/css/all-custom.css' %}">
 {% endblock  %}
 
 {% block content %}
 <div class="container p-3">
     <h1 class="display-3 text-center">Add Accident</h1>
+
+<div class="info p-4">
 
 <form action="/employee/add-accident" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
@@ -22,6 +24,7 @@ Add | Accident
       </div>     
     <button class="btn btn-primary">Add Accident</button>
   </form>
+</div>
 </div>
 
 {% endblock  %}

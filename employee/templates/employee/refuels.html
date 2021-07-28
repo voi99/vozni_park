@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Your Refuels
+{% endblock  %}
+
+{% block css_files %}
+   <link rel="stylesheet" href="{% static 'login/css/all-custom.css' %}">
+{% endblock  %}
+
+{% block content %}
+{% include 'employee/includes/main-page-button.html' %}
+    <div class="container p-4">
+        <h1 class="display-3 text-center p-3">Your Refuels</h1>
+        <div class="info p-3">
+        <ul class="list-group">
+            {% for refuel in refuels %}
+                <li class="list-group-item text-center">{{refuel}}</li>
+            {% endfor %}
+        </ul>
+         </div>
+    </div>
+{% endblock  %}

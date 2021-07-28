@@ -28,6 +28,10 @@ class Category(models.Model):
 class Fuel(models.Model):
     type = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.type
+    
+
 class Vehicle(models.Model):
     model_name = models.CharField(max_length=50)
     category = models.ForeignKey("Category", on_delete=models.SET_NULL, null=True, related_name="category_vehicles")
@@ -46,5 +50,5 @@ class Vehicle(models.Model):
     #     super().save()
     
     def __str__(self):
-        return f"{self.model_name} ({self.category})"
+        return f"{self.model_name}"
      

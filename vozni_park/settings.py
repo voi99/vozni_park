@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'location_field.apps.DefaultConfig',
     'crispy_forms',
+    'bootstrap_datepicker_plus',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -162,3 +164,7 @@ LOCATION_FIELD = {
 
 MEDIA_ROOT = BASE_DIR / "uploads"
 MEDIA_URL = "/project-media/"
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}

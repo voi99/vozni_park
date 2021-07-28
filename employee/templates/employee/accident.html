@@ -1,20 +1,26 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}
     Accident Details
 {% endblock  %}
 
+{% block css_files %}
+   <link rel="stylesheet" href="{% static 'login/css/all-custom.css' %}">
+{% endblock  %}
+
 {% block content %}
-<a href="{% url 'employee' %}"class="btn btn-primary" style="position:fixed;bottom:3;right:3;">Main Page</a>
-    <div class="container p-2">
-        <h1 class="display-3 text-center">{{accident.employee}} - {{accident.vehicle}}</h1>
+{% include 'employee/includes/main-page-button.html' %}
+    <div class="container p-4">
+        <h1 class="display-3 text-center pb-3">{{accident.employee}} - {{accident.vehicle}}</h1>
         
+     <div class="info p-4">
     <h1 class="display-6">Accident Location: {{accident.city}}</h1>
     
     <div class="rounded-3"id="googleMap" style="height:40vh;"></div>
 
     <h1 clas="display-6 text-center">Photo of the accident</h1>
         <img src="{{accident.image.url}}" alt="" class="img-fluid rounded-3">
+   </div>
    </div>
 
 <input type="hidden" value="{{vehicle_cor1}}" id='cor-1'>

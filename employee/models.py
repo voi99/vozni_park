@@ -36,3 +36,6 @@ class Refuel(models.Model):
     amount = models.DecimalField(max_digits=6,decimal_places=2)
     date = models.DateField()
 
+    def __str__(self):
+        return f"{self.date}  {self.amount}€"
+

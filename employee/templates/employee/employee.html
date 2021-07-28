@@ -5,7 +5,7 @@ Employee
 {% endblock  %}
 
 {% block css_files %}
-   <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
+   <link rel="stylesheet" href="{% static 'login/css/all-custom.css' %}">
 {% endblock  %}
 
 {% block content %}
@@ -13,12 +13,12 @@ Employee
  
 <a href="{% url 'logout' %}"class="btn btn-primary" style="position:fixed;bottom:3;right:3;">Log Out</a>
 
-      <h1 class="display-3 text-center">Welcome {{user|title}}!</h1>
+      <h1 class="display-3 text-center pb-3">Welcome {{user|title}}!</h1>
 
 
-    <div class="row mb-3">
+    <div class="row mb-4">
       <div class="col-2"></div>
-      <div class="col-4 user">
+      <div class="col-4">
          <a href="{% url 'employee-info' employee_slug %}" class="option">
             <div class="card text-center p-4" style="width:31vw">
                 <img src="{% static 'employee/images/user.svg' %}"  class="card-img-top" alt="User">
@@ -26,7 +26,7 @@ Employee
        </a>
       </div>
 
-      <div class="col-4 car">
+      <div class="col-4">
          <a href="{% url 'vehicle' vehicle_slug %}" class="option">
             <div class="card text-center p-4" style="width:31vw">
                 <img src="{% static 'employee/images/car.svg' %}"  class="card-img-top" alt="Car">
@@ -40,9 +40,9 @@ Employee
 
 
 
-    <div class="row mb-3">
+    <div class="row mb-4">
       <div class="col-2"></div>
-      <div class="col-4 accident">
+      <div class="col-4">
          <a href="{% url 'add-accident' %}" class="option">
             <div class="card text-center p-4" style="width:31vw">
                 <img src="{% static 'employee/images/accident.svg' %}"  class="card-img-top" alt="Accident">
@@ -50,8 +50,8 @@ Employee
        </a>
       </div>
 
-      <div class="col-4 fuel">
-         <a href="" class="option">
+      <div class="col-4">
+         <a href="{% url 'refuel' %}" class="option">
             <div class="card text-center p-4" style="width:31vw">
                 <img src="{% static 'employee/images/fuel.svg' %}"  class="card-img-top" alt="Fuel">
         </div>
@@ -60,5 +60,20 @@ Employee
 
  <div class="col-2"></div>
     </div>
+
+   <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4">
+         <a href="{% url 'add-accident' %}" class="option">
+            <div class="card text-center p-4" style="width:31vw">
+                <img src="{% static 'employee/images/car_malfunction.svg' %}"  class="card-img-top" alt="Accident">
+        </div>
+       </a>
+      </div>
+
+   <div class="col-4"></div>
+    </div>
   </div>
+  </div>
+  
 {% endblock  %}

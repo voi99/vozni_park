@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}
 Your Vehicle | {{vehicle.model_name}}
+{% endblock  %}
+
+{% block css_files %}
+ <link rel="stylesheet" href="{% static 'login/css/all-custom.css' %}">
 {% endblock  %}
 
 {% block content %}
 <div class="container p-3">
   <h1 class="display-3 text-center">{{vehicle.model_name}}</h1>
   
-  <div class="mx-auto"style="width:80%">
+  <div class="info p-4">
 
   <h1 class="display-6">Brand</h1>
   <p class="ps-1 lead">{{vehicle.brand}}</p>
@@ -19,6 +23,9 @@ Your Vehicle | {{vehicle.model_name}}
   <h1 class="display-6">Category</h1>
   <p class="ps-1 lead">{{vehicle.category}}</p>
 
+  <h1 class="display-6">Fuel Type</h1>
+  <p class="ps-1 lead">{{vehicle.fuel}}</p>
+
   <h1 class="display-6">Color</h1>
   <p class="ps-1 lead">{{vehicle.color}}</p>
 
@@ -28,6 +35,7 @@ Your Vehicle | {{vehicle.model_name}}
 
   <h1 class="pt-3 display-6">Your vehicle garage</h1>
   <div class="rounded-3"id="googleMap" style="height:40vh;"></div>
+  
   </div>
 </div>
 

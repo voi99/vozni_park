@@ -1,5 +1,4 @@
 from employee.models import Employee
-from django.core.exceptions import ValidationError
 from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib.auth import authenticate,login, logout

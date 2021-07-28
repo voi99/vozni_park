@@ -1,11 +1,12 @@
-from .models import Accident, Employee
+from django.http.response import HttpResponseRedirect
+from .models import Accident, Employee, Refuel
 from vehicle.models import Vehicle
 from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib.auth.decorators import login_required
-from .forms import AccidentForm
-from django.views.generic import DetailView
+from .forms import AccidentForm,RefuelForm
+from django.views.generic import DetailView,ListView
 from django.urls import reverse
 
 
@@ -69,3 +70,33 @@ class AccidentView(DetailView):
         template_name = "employee/accident.html"
         model = Accident
 
+class AddReful(View):
+    def get(self, request, *args, **kwargs):
+        form = RefuelForm()
+
+        return render(request,"employee/add_refuel.html",{
+            "form":form,
+        })
+
+    def post(self, request, *args, **kwargs):
+        form = RefuelForm(request.POST)
+        employee = request.session.get('employee_id')
+        vehicle = request.session.get('employee_vehicle_id')
+        print(employee)
+
+        if form.is_valid():
+            form_new = form.save(commit=False)
+            form_new.employee = Employee.objects.get(pk=employee)
+            form_new.vehicle = Vehicle.objects.get(pk=vehicle)
+            form_new.save()
+            return HttpResponseRedirect(reverse('all-refuels'))
+
+        return render(request,"employee/add_fuel.html",{
+            "form":form
+        })
+
+class RefuelsView(ListView):
+        template_name = "employee/refuels.html"
+        model = Refuel
+        context_object_name = "refuels"
+        

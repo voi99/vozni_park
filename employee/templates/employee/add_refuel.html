@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Add | Fuel
+{% endblock  %}
+
+{% block css_files %}
+   <link rel="stylesheet" href="{% static 'login/css/all-custom.css' %}">
+{% endblock  %}
+
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}       
+{% bootstrap_javascript jquery='full' %}
+{{ form.media }}   
+
+{% block content %}
+    <div class="container">
+        <h1 class="display-3 text-center">
+            Add | Refuel
+        </h1>
+        <div class="info p-4">
+        
+        <form action="" method="POST">
+        {% csrf_token %}
+            <div class="mb-3">
+                {{form|crispy}}
+             </div>
+
+          <button class="btn btn-primary">Add Accident</button>
+          </form>
+           </div>
+    </div>
+{% endblock  %}

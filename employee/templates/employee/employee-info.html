@@ -5,13 +5,15 @@ Employee
 {% endblock  %}
 
 {% block css_files %}
-   <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
+   <link rel="stylesheet" href="{% static 'login/css/all-custom.css' %}">
 {% endblock  %}
 
 {% block content %}
     <div class="container p-4">
-        <h1 class="display-3 text-center">{{employee.first_name}} {{employee.last_name}}</h1>
+        <h1 class="display-3 text-center pb-3">{{employee.first_name}} {{employee.last_name}}</h1>
 
+        <div class="info p-4">
+       
         <h1 class="display-6">
             Your Address:
         </h1>
@@ -21,9 +23,9 @@ Employee
         <h1 class="display-6">
             Your Licence Categories:
         </h1>
-        <ul>
+        <ul class="list-group pb-3">
         {% for category in employee.categories.all %}
-            <li>{{category}}</li>
+            <li class="list-group-item">{{category}}</li>
         {% endfor %}
         </ul>
 
@@ -33,11 +35,21 @@ Employee
         
         <a href="{% url 'vehicle' vehicle_slug %}" class="ps-2 lead">{{employee.vehicle.model_name}}</a>
 
-        <h1 class="display-6">Your Accidents:</h1>
+        <h1 class="display-6 pt-3">Your Accidents:</h1>
+        <ul class="list-group">
             {% for accident in employee.employee_accidents.all %}
-                <li><a href="{% url 'accident' accident.id %}">{{accident}}</a></li>
+                <li class="list-group-item"><a href="{% url 'accident' accident.id %}">{{accident}}</a></li>
             {% endfor %}
-        
+        </ul>
+
+        <h1 class="display-6 pt-3">Your Refuels:</h1>
+        <ul class="list-group">
+            {% for refuel in employee.employee_refuels.all %}
+                <li class="list-group-item">{{refuel}}</a></li>
+            {% endfor %}
+        </ul>
+
+         </div>
     </div>
 
     
