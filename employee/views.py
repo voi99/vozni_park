@@ -1,11 +1,13 @@
-from .models import Employee
+from .models import Accident, Employee
 from vehicle.models import Vehicle
 from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from .forms import AccidentForm
-from django import forms
+from django.views.generic import DetailView
+from django.urls import reverse
+
 
 
 # Create your views here.
@@ -57,8 +59,13 @@ class CreateAccidentView(View):
             form_new.employee = Employee.objects.get(pk=employee)
             form_new.vehicle = Vehicle.objects.get(pk=vehicle)
             form_new.save()
-            return redirect('/employee')
-        
+            return redirect(f"accident/{form_new.pk}")
+
         return render(request,"employee/create_accident.html",{
             "form":form
         })
+
+class AccidentView(DetailView):
+        template_name = "employee/accident.html"
+        model = Accident
+

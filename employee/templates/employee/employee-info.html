@@ -31,11 +31,11 @@ Employee
             Your Vehicle:
         </h1>
         
-        <a href="{% url 'vehicle' vehicle_slug %}"><p class="ps-2 lead">{{employee.vehicle.model_name}}</p></a>
+        <a href="{% url 'vehicle' vehicle_slug %}" class="ps-2 lead">{{employee.vehicle.model_name}}</a>
 
         <h1 class="display-6">Your Accidents:</h1>
             {% for accident in employee.employee_accidents.all %}
-                <li>{{accident}}</li>
+                <li><a href="{% url 'accident' accident.id %}">{{accident}}</a></li>
             {% endfor %}
         
     </div>

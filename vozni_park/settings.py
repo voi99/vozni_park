@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'location_field.apps.DefaultConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -151,3 +152,6 @@ LOCATION_FIELD = {
     'provider.google.api_libraries': '',
     'provider.google.map.type': 'ROADMAP',
 }
+
+MEDIA_ROOT = BASE_DIR / "uploads"
+MEDIA_URL = "/project-media/"

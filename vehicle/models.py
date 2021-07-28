@@ -25,11 +25,14 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.category_name}"
 
+class Fuel(models.Model):
+    type = models.CharField(max_length=50)
 
 class Vehicle(models.Model):
     model_name = models.CharField(max_length=50)
-    category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True, related_name="category_vehicles")
-    brand = models.ForeignKey(Brand,on_delete=models.CASCADE,null=True,related_name="brand_vehicles")
+    category = models.ForeignKey("Category", on_delete=models.SET_NULL, null=True, related_name="category_vehicles")
+    brand = models.ForeignKey(Brand,on_delete=models.SET_NULL,null=True,related_name="brand_vehicles")
+    fuel = models.ForeignKey(Fuel,on_delete=models.SET_NULL,null=True,related_name="fuel_vehicles")
     year = models.IntegerField(validators=[MinValueValidator(2000),
     MaxValueValidator(datetime.datetime.now().year)])
     color = models.CharField(max_length=50)

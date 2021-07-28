@@ -30,3 +30,9 @@ class Accident(models.Model):
     def __str__(self):
         return f"{self.city} {self.date} - {self.vehicle}"
 
+class Refuel(models.Model):
+    employee = models.ForeignKey(Employee,on_delete=models.CASCADE,related_name="employee_refulings")
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name="vehicle_refulings")
+    amount = models.DecimalField(max_digits=6,decimal_places=2)
+    date = models.DateField()
+

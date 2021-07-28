@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Accident Details
+{% endblock  %}
+
+{% block content %}
+<a href="{% url 'employee' %}"class="btn btn-primary" style="position:fixed;bottom:3;right:3;">Main Page</a>
+    <div class="container p-2">
+        <h1 class="display-3 text-center">{{accident.employee}} - {{accident.vehicle}}</h1>
+        
+    <h1 class="display-6">Accident Location: {{accident.city}}</h1>
+    
+    <div class="rounded-3"id="googleMap" style="height:40vh;"></div>
+
+    <h1 clas="display-6 text-center">Photo of the accident</h1>
+        <img src="{{accident.image.url}}" alt="" class="img-fluid rounded-3">
+   </div>
+
+<input type="hidden" value="{{vehicle_cor1}}" id='cor-1'>
+<input type="hidden" value="{{vehicle_cor2}}" id='cor-2'>
+
+<script>
+function myMap() {
+var mapProp= {
+  center:new google.maps.LatLng(document.getElementById('cor-1').value,document.getElementById('cor-2').value),
+  zoom:110,
+};
+var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+}
+
+function disableBack() { window.history.forward(); }
+        setTimeout("disableBack()", 0);
+        window.onunload = function () { null };
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHvKEYbD4EizRmlfhJmlqcXbLQa1143jQ&callback=myMap"></script>
+
+{% endblock  %}

@@ -7,4 +7,4 @@ class AccidentForm(ModelForm):
     class Meta:
         model = Accident
         exclude = ['employee','vehicle']
-        widgets= {'date':forms.SelectDateWidget(years=range(2000,datetime.datetime.now().year+1))}
+        widgets= {'date':forms.SelectDateWidget(years=[datetime.datetime.now().year])}
