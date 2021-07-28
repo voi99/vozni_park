@@ -12,15 +12,22 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+import environ
+#env
+env = environ.Env()
+environ.Env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b(m=5*xm)lh01ey457nsg$d^3!#d8o!!9up=2hqh=sb7s!(wcu'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -148,7 +155,7 @@ LOCATION_FIELD = {
     'map.provider': 'google',
     'search.provider': 'google',
     'provider.google.api': '//maps.google.com/maps/api/js',
-    'provider.google.api_key': 'AIzaSyDHvKEYbD4EizRmlfhJmlqcXbLQa1143jQ',
+    'provider.google.api_key': env('GOOGLE_API_KEY'),
     'provider.google.api_libraries': '',
     'provider.google.map.type': 'ROADMAP',
 }
