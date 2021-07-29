@@ -15,13 +15,19 @@ Employee
         <div class="info p-4">
        
         <h1 class="display-6">
-            Your Address:
+            Address:
         </h1>
 
         <p class="ps-2 lead">{{employee.address}}</p>
 
         <h1 class="display-6">
-            Your Licence Categories:
+            Contact:
+        </h1>
+
+        <p class="ps-2 lead">{{employee.contact}}</p>
+
+        <h1 class="display-6">
+            Driving Licence Categories:
         </h1>
         <ul class="list-group pb-3">
         {% for category in employee.categories.all %}
@@ -37,16 +43,24 @@ Employee
 
         <h1 class="display-6 pt-3">Your Accidents:</h1>
         <ul class="list-group">
+        {% if not employee.employee_accidents.all %}
+                <li class="list-group-item">Luckly, you have not any accident!</li>
+        {% else %}
             {% for accident in employee.employee_accidents.all %}
                 <li class="list-group-item"><a href="{% url 'accident' accident.id %}">{{accident}}</a></li>
             {% endfor %}
+        {% endif %}
         </ul>
 
         <h1 class="display-6 pt-3">Your Refuels:</h1>
         <ul class="list-group">
+        {% if not employee.employee_refuels.all %}
+                <li class="list-group-item">You have not made any refuels!</li>
+        {% else %}
             {% for refuel in employee.employee_refuels.all %}
                 <li class="list-group-item">{{refuel}}</a></li>
             {% endfor %}
+        {% endif %}
         </ul>
 
          </div>

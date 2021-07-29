@@ -35,8 +35,15 @@ Your Vehicle | {{vehicle.model_name}}
 
   <h1 class="pt-3 display-6">Your vehicle garage</h1>
   <div class="rounded-3"id="googleMap" style="height:40vh;"></div>
-  
+
+  <h1 class="pt-3 display-6">Vehicle Breakdowns</h1>
+      <ul class="list-group">
+            {% for breakdown in vehicle.vehicle_breakdowns.all %}
+                <li class="list-group-item"><a href="{% url 'vehicle-breakdown' breakdown.id %}">{{breakdown}}</a></li>
+            {% endfor %}
+      </ul>
   </div>
+
 </div>
 
 <input type="hidden" value="{{vehicle_cor1}}" id='cor-1'>

@@ -57,14 +57,22 @@ class InsuranceCompany(models.Model):
     address = models.CharField(max_length=150)
     contact = models.CharField(max_length=10)
 
+    def __str__(self):
+        return self.name
+    
     class Meta:
         verbose_name_plural = "Insurance companies"
 
 class InsurancePolicy(models.Model):
     insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.CASCADE, null=True, related_name="company_polices")
     vehicle = models.OneToOneField(Vehicle,on_delete=models.CASCADE,related_name='policy')
+    policy_code = models.CharField(max_length=50)
     insurance_started = models.DateField()
     insurance_expires = models.DateField()
 
     class Meta:
         verbose_name_plural = "Insurance policies"
+
+    def __str__(self):
+        return f"{self.insurance_company} - {self.vehicle}"
+    

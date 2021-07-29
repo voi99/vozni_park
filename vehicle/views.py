@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views import View
 from .models import Vehicle
+from django.views.generic import DetailView
+from employee.models import VehicleBreakdown
 
 # Create your views here.
 
@@ -17,3 +19,7 @@ class VehicleInfo(View):
             "vehicle_cor2":vehicle_cor2
         })
 
+class VehicleBreakdownInfo(DetailView):
+    template_name = "vehicle/vehicle_breakdown.html"
+    model = VehicleBreakdown
+    context_object_name = 'breakdown'

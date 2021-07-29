@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-    Your Refuels
+    Vehicle Breakdowns
 {% endblock  %}
 
 {% block css_files %}
@@ -11,16 +11,12 @@
 {% block content %}
 {% include 'employee/includes/main-page-button.html' %}
     <div class="container p-4">
-        <h1 class="display-3 text-center p-3">Your Refuels</h1>
+        <h1 class="display-3 text-center p-3">Vehicle Breakdowns</h1>
         <div class="info p-3">
         <ul class="list-group">
-            {% if refuesl is not None %}
-                 {% for refuel in refuels %}
-                <li class="list-group-item text-center">{{refuel}}</li>
-                {% endfor %} 
-            {% else %}
-                <li class="list-group-item text-center">You have not any refuels!</li>
-           {% endif %}
+            {% for breakdown in breakdowns %}
+                <li class="list-group-item text-center">{{breakdown}}</li>
+            {% endfor %}
         </ul>
          </div>
     </div>

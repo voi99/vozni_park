@@ -1,11 +1,11 @@
 from django.http.response import HttpResponseRedirect
-from .models import Accident, Employee, Refuel
+from .models import Accident, Employee, Refuel, VehicleBreakdown
 from vehicle.models import Vehicle
 from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib.auth.decorators import login_required
-from .forms import AccidentForm,RefuelForm
+from .forms import AccidentForm,RefuelForm, VehicleBreakdownForm
 from django.views.generic import DetailView,ListView
 from django.urls import reverse
 
@@ -99,4 +99,56 @@ class RefuelsView(ListView):
         template_name = "employee/refuels.html"
         model = Refuel
         context_object_name = "refuels"
+
+
+        def get_context_data(self, **kwargs):
+            ctx = super().get_context_data(**kwargs)
+            employee = self.request.session.get('employee_id')
+            try:
+                ctx['refuels'] = Refuel.objects.get(employee=employee)
+                return ctx
+            except:
+                ctx['refuels'] = None
+                return ctx
+            
+
+class AddVehicleBreakdown(View):
+    def get(self, request, *args, **kwargs):
+        form = VehicleBreakdownForm()
+
+        return render(request,"employee/add_vehicle_breakdown.html",{
+            "form":form,
+        })
+
+    def post(self, request, *args, **kwargs):
+        form = VehicleBreakdownForm(request.POST)
+        employee = request.session.get('employee_id')
+        vehicle = request.session.get('employee_vehicle_id')
+
+        if form.is_valid():
+            form_new = form.save(commit=False)
+            form_new.employee = Employee.objects.get(pk=employee)
+            form_new.vehicle = Vehicle.objects.get(pk=vehicle)
+            form_new.save()
+            return HttpResponseRedirect(reverse('all-breakdowns'))
+
+        return render(request,"employee/add_vehicle_breakdown.html",{
+            "form":form
+        })
         
+class VehicleBreakdowns(ListView):
+        template_name = "employee/vehicle_breakdowns.html"
+        model = VehicleBreakdown
+        context_object_name = "breakdowns"
+
+
+        def get_context_data(self, **kwargs):
+            ctx = super().get_context_data(**kwargs)
+            vehicle = self.request.session.get('employee_vehicle_id')
+            
+            try:
+                ctx['breakdowns'] = Vehicle.objects.get(pk=vehicle).vehicle_breakdowns.all()
+                return ctx
+            except:
+                ctx['breakdowns'] = None
+                return ctx

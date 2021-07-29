@@ -45,7 +45,10 @@ class Refuel(models.Model):
 
 class VehicleBreakdown(models.Model):
     employee = models.ForeignKey(Employee,on_delete=models.CASCADE,related_name="employee_vehicle_breakdowns")
-    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name="vehicle_brekadowns")
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name="vehicle_breakdowns")
     title = models.CharField(max_length=50)
     description = models.TextField(max_length=1000)
     date = models.DateField()
+
+    def __str__(self):
+        return f"{self.vehicle} {self.title} ({self.date})"
