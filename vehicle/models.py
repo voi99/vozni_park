@@ -4,6 +4,7 @@ import datetime
 from location_field.models.plain import PlainLocationField
 
 
+
 #from django.utils.text import slugify
 
 # Create your models here.
@@ -34,13 +35,12 @@ class Fuel(models.Model):
 
 class Vehicle(models.Model):
     model_name = models.CharField(max_length=50)
-    category = models.ForeignKey("Category", on_delete=models.SET_NULL, null=True, related_name="category_vehicles")
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="category_vehicles")
     brand = models.ForeignKey(Brand,on_delete=models.SET_NULL,null=True,related_name="brand_vehicles")
     fuel = models.ForeignKey(Fuel,on_delete=models.SET_NULL,null=True,related_name="fuel_vehicles")
     year = models.IntegerField(validators=[MinValueValidator(2000),
     MaxValueValidator(datetime.datetime.now().year)])
     color = models.CharField(max_length=50)
-    last_registration = models.DateField()
     slug = models.SlugField(default="",null=False,db_index=True)
     garage = models.CharField(max_length=255)
     location = PlainLocationField(based_fields=['garage'],zoom=100)
@@ -51,4 +51,20 @@ class Vehicle(models.Model):
     
     def __str__(self):
         return f"{self.model_name}"
-     
+
+class InsuranceCompany(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=150)
+    contact = models.CharField(max_length=10)
+
+    class Meta:
+        verbose_name_plural = "Insurance companies"
+
+class InsurancePolicy(models.Model):
+    insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.CASCADE, null=True, related_name="company_polices")
+    vehicle = models.OneToOneField(Vehicle,on_delete=models.CASCADE,related_name='policy')
+    insurance_started = models.DateField()
+    insurance_expires = models.DateField()
+
+    class Meta:
+        verbose_name_plural = "Insurance policies"

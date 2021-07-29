@@ -5,6 +5,8 @@ from location_field.models.plain import PlainLocationField
 from vehicle.models import Vehicle
 
 
+
+
 # Create your models here.
 
 class Employee(models.Model):
@@ -12,6 +14,7 @@ class Employee(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
+    contact = models.CharField(max_length=10)
     categories = models.ManyToManyField('vehicle.Category')
     vehicle = models.OneToOneField('vehicle.Vehicle',on_delete=CASCADE,null=True)
     slug = models.SlugField(default="",null=False,db_index=True)
@@ -39,3 +42,10 @@ class Refuel(models.Model):
     def __str__(self):
         return f"{self.date}  {self.amount}€"
 
+
+class VehicleBreakdown(models.Model):
+    employee = models.ForeignKey(Employee,on_delete=models.CASCADE,related_name="employee_vehicle_breakdowns")
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name="vehicle_brekadowns")
+    title = models.CharField(max_length=50)
+    description = models.TextField(max_length=1000)
+    date = models.DateField()

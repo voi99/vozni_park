@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Brand,Category,Vehicle,Fuel
+from .models import Brand,Category,Vehicle,Fuel,InsuranceCompany,InsurancePolicy
 
 class BrandAdmin(admin.ModelAdmin):
     list_display = ("name","country",)
@@ -16,10 +16,18 @@ class VehicleAdmin(admin.ModelAdmin):
 class FuelAdmin(admin.ModelAdmin):
     list_display = ("type",)
 
+class InsuranceCompanyAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+
+class InsurancePolicyAdmin(admin.ModelAdmin):
+    list_display = ("insurance_company","vehicle",)
+
 admin.site.register(Brand,BrandAdmin)
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(Vehicle,VehicleAdmin)
 admin.site.register(Fuel,FuelAdmin)
+admin.site.register(InsuranceCompany,InsuranceCompanyAdmin)
+admin.site.register(InsurancePolicy,InsurancePolicyAdmin)
 
 
 admin.site.site_header = "Administracija Voznog Parka"
