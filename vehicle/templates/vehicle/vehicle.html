@@ -30,7 +30,14 @@ Your Vehicle | {{vehicle.model_name}}
   <p class="ps-1 lead">{{vehicle.color}}</p>
 
   <h1 class="display-6">Registration expires</h1>
-  <p class="ps-1 lead">{{vehicle.policy.insurance_expires}}</p>
+  
+  <p class="ps-1 lead">
+  {% for policy in vehicle.policy.all %}
+    {% if forloop.last %}
+      {{policy.insurance_expires}}
+    {% endif %}
+  {% endfor %}
+  </p>
 
 
   <h1 class="pt-3 display-6">Your vehicle garage</h1>

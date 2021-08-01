@@ -31,7 +31,6 @@ class Fuel(models.Model):
 
     def __str__(self):
         return self.type
-    
 
 class Vehicle(models.Model):
     model_name = models.CharField(max_length=50)
@@ -41,6 +40,7 @@ class Vehicle(models.Model):
     year = models.IntegerField(validators=[MinValueValidator(2000),
     MaxValueValidator(datetime.datetime.now().year)])
     color = models.CharField(max_length=50)
+    license_plate = models.CharField(max_length=7,unique=True,db_index=True)
     slug = models.SlugField(default="",null=False,db_index=True)
     garage = models.CharField(max_length=255)
     location = PlainLocationField(based_fields=['garage'],zoom=100)
@@ -64,8 +64,8 @@ class InsuranceCompany(models.Model):
         verbose_name_plural = "Insurance companies"
 
 class InsurancePolicy(models.Model):
-    insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.CASCADE, null=True, related_name="company_polices")
-    vehicle = models.OneToOneField(Vehicle,on_delete=models.CASCADE,related_name='policy')
+    insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.CASCADE, related_name="company_polices")
+    vehicle = models.ForeignKey(Vehicle,on_delete=models.CASCADE,related_name='policy')
     policy_code = models.CharField(max_length=50)
     insurance_started = models.DateField()
     insurance_expires = models.DateField()
