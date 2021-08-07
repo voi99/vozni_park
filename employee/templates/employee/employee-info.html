@@ -10,7 +10,9 @@ Employee
 
 {% block content %}
     <div class="container p-4">
-        <h1 class="display-3 text-center pb-3">{{employee.first_name}} {{employee.last_name}}</h1>
+        <h1 class="display-3 text-center pb-3">{{employee.first_name}} {{employee.last_name}} 
+        
+        <a href="{% url 'employee-edit' employee.slug %}" class="btn btn-primary">Edit</a></h1>
 
         <div class="info p-4">
        

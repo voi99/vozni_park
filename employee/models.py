@@ -3,9 +3,7 @@ from django.db.models.deletion import CASCADE
 from django.contrib.auth.models import User
 from location_field.models.plain import PlainLocationField
 from vehicle.models import Vehicle
-
-
-
+from django.urls import reverse
 
 # Create your models here.
 
@@ -21,6 +19,9 @@ class Employee(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} "
+
+    def get_absolute_url(self):
+        return reverse('employee-info', kwargs={'slug': self.slug})
 
 class Accident(models.Model):
     employee = models.ForeignKey(Employee,on_delete=models.CASCADE,related_name="employee_accidents")

@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from .forms import AccidentForm,RefuelForm, VehicleBreakdownForm
-from django.views.generic import DetailView,ListView
+from django.views.generic import DetailView,ListView,UpdateView
 from django.urls import reverse
 
 
@@ -152,3 +152,10 @@ class VehicleBreakdowns(ListView):
             except:
                 ctx['breakdowns'] = None
                 return ctx
+
+
+class EmployeeEdit(UpdateView):
+    model = Employee
+    fields = ['address','contact','categories']
+    template_name = 'employee/employee_edit.html'
+    
