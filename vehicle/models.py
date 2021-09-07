@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator,MaxValueValidator
 import datetime
 from location_field.models.plain import PlainLocationField
+from django.core.validators import RegexValidator
 
 
 
@@ -55,7 +56,7 @@ class Vehicle(models.Model):
 class InsuranceCompany(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=150)
-    contact = models.CharField(max_length=10)
+    contact = models.CharField(max_length=10,validators=[RegexValidator(regex='^[0-9]{9,10}$')])
 
     def __str__(self):
         return self.name
@@ -66,7 +67,7 @@ class InsuranceCompany(models.Model):
 class InsurancePolicy(models.Model):
     insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.CASCADE, related_name="company_polices")
     vehicle = models.ForeignKey(Vehicle,on_delete=models.CASCADE,related_name='policy')
-    policy_code = models.CharField(max_length=50)
+    policy_code = models.IntegerField(max_length=20,unique=True)
     insurance_started = models.DateField()
     insurance_expires = models.DateField()
 

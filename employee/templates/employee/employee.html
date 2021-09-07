@@ -26,6 +26,8 @@ Employee
        </a>
       </div>
 
+      {% if vehicle_slug %}
+      
       <div class="col-4">
          <a href="{% url 'vehicle' vehicle_slug %}" class="option">
             <div class="card text-center p-4" style="width:31vw">
@@ -73,6 +75,7 @@ Employee
 
    <div class="col-4"></div>
     </div>
+    {% endif %}
   </div>
   </div>
   

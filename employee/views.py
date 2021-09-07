@@ -21,7 +21,15 @@ class EmployeeView(View):
         user = request.user
         employee_slug = request.session.get('employee_slug')
         vehicle_slug = request.session.get('employee_vehicle')
-       
+
+        if vehicle_slug is None:
+            try :
+                vehicle = Vehicle.objects.get(employee=request.session.get('employee_id'))
+                vehicle_slug = vehicle.slug
+                request.session['employee_vehicle'] = vehicle_slug
+            except:
+                pass
+        
         return render(request,"employee/employee.html",{
             "user":user,
             "employee_slug":employee_slug,
@@ -33,14 +41,11 @@ class EmployeeInfoView(View):
     def get(self,request,slug):
         employee = Employee.objects.get(slug=slug)
         vehicle_slug = request.session.get('employee_vehicle')
-       
         
         return render(request,"employee/employee-info.html",{
             "employee":employee,
             "vehicle_slug":vehicle_slug
         })
-
-
 
 class CreateAccidentView(View):
     def get(self, request, *args, **kwargs):

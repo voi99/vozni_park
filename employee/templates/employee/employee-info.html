@@ -41,9 +41,13 @@ Employee
             Your Vehicle:
         </h1>
         
+        {% if not vehicle_slug %}
+            <p class="ps-2 lead">There is no vehicle assigned to you!</p>
+        {% else %}
         <a href="{% url 'vehicle' vehicle_slug %}" class="ps-2 lead">{{employee.vehicle.model_name}}</a>
+        {% endif %}
 
-        <h1 class="display-6 pt-3">Your Accidents:</h1>
+        <h1 class="display-6">Your Accidents:</h1>
         <ul class="list-group">
         {% if not employee.employee_accidents.all %}
                 <li class="list-group-item">Luckly, you have not any accident!</li>

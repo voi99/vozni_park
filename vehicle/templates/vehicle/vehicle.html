@@ -23,6 +23,9 @@ Your Vehicle | {{vehicle.model_name}}
   <h1 class="display-6">Category</h1>
   <p class="ps-1 lead">{{vehicle.category}}</p>
 
+  <h1 class="display-6">License Plate</h1>
+  <p class="ps-1 lead">{{vehicle.license_plate}}</p>
+
   <h1 class="display-6">Fuel Type</h1>
   <p class="ps-1 lead">{{vehicle.fuel}}</p>
 
@@ -32,11 +35,17 @@ Your Vehicle | {{vehicle.model_name}}
   <h1 class="display-6">Registration expires</h1>
   
   <p class="ps-1 lead">
+  {% if vehicle.policy.all %}
+
   {% for policy in vehicle.policy.all %}
     {% if forloop.last %}
       {{policy.insurance_expires}}
     {% endif %}
   {% endfor %}
+
+  {% else %}
+  <p class="ps-2 lead text-danger">This vehicle is not registered!</p>
+{% endif %}
   </p>
 
 
@@ -44,11 +53,15 @@ Your Vehicle | {{vehicle.model_name}}
   <div class="rounded-3"id="googleMap" style="height:40vh;"></div>
 
   <h1 class="pt-3 display-6">Vehicle Breakdowns</h1>
+  {% if vehicle.vehicle_breakdowns.all %}
       <ul class="list-group">
             {% for breakdown in vehicle.vehicle_breakdowns.all %}
                 <li class="list-group-item"><a href="{% url 'vehicle-breakdown' breakdown.id %}">{{breakdown}}</a></li>
             {% endfor %}
       </ul>
+  {% else %}
+              <p class="ps-2 lead">There is not recorded vehicle breakdowns!</p>
+  {% endif %}
   </div>
 
 </div>

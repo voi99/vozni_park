@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 from location_field.models.plain import PlainLocationField
 from vehicle.models import Vehicle
 from django.urls import reverse
@@ -12,9 +13,9 @@ class Employee(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
-    contact = models.CharField(max_length=10)
+    contact = models.CharField(max_length=10,validators=[RegexValidator(regex='^[0-9]{9,10}$')])
     categories = models.ManyToManyField('vehicle.Category')
-    vehicle = models.OneToOneField('vehicle.Vehicle',on_delete=CASCADE,null=True)
+    vehicle = models.OneToOneField('vehicle.Vehicle',on_delete=CASCADE,null=True,blank=True)
     slug = models.SlugField(default="",null=False,db_index=True)
 
     def __str__(self):
@@ -29,6 +30,7 @@ class Accident(models.Model):
     city = models.CharField(max_length=100)
     location = PlainLocationField(based_fields=['city'],zoom=7)
     image = models.ImageField(upload_to='images')
+    description = models.TextField(max_length=1000)
     date = models.DateField()
     
     def __str__(self):
@@ -42,7 +44,6 @@ class Refuel(models.Model):
 
     def __str__(self):
         return f"{self.date}  {self.amount}€"
-
 
 class VehicleBreakdown(models.Model):
     employee = models.ForeignKey(Employee,on_delete=models.CASCADE,related_name="employee_vehicle_breakdowns")
