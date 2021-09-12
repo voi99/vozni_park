@@ -1,9 +1,8 @@
 from django.db import models
-from django.core.validators import MinValueValidator,MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 import datetime
 from location_field.models.plain import PlainLocationField
 from django.core.validators import RegexValidator
-
 
 
 #from django.utils.text import slugify
@@ -17,6 +16,7 @@ class Brand(models.Model):
     def __str__(self):
         return f"{self.name} ({self.country})"
 
+
 class Category(models.Model):
     category_name = models.CharField(max_length=3)
     description = models.TextField(max_length=500)
@@ -27,47 +27,57 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.category_name}"
 
+
 class Fuel(models.Model):
     type = models.CharField(max_length=50)
 
     def __str__(self):
         return self.type
 
+
 class Vehicle(models.Model):
     model_name = models.CharField(max_length=50)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="category_vehicles")
-    brand = models.ForeignKey(Brand,on_delete=models.SET_NULL,null=True,related_name="brand_vehicles")
-    fuel = models.ForeignKey(Fuel,on_delete=models.SET_NULL,null=True,related_name="fuel_vehicles")
+    category = models.ForeignKey(
+        Category, on_delete=models.SET_NULL, null=True, related_name="category_vehicles")
+    brand = models.ForeignKey(
+        Brand, on_delete=models.SET_NULL, null=True, related_name="brand_vehicles")
+    fuel = models.ForeignKey(
+        Fuel, on_delete=models.SET_NULL, null=True, related_name="fuel_vehicles")
     year = models.IntegerField(validators=[MinValueValidator(2000),
-    MaxValueValidator(datetime.datetime.now().year)])
+                                           MaxValueValidator(datetime.datetime.now().year)])
     color = models.CharField(max_length=50)
-    license_plate = models.CharField(max_length=7,unique=True,db_index=True)
-    slug = models.SlugField(default="",null=False,db_index=True)
+    license_plate = models.CharField(max_length=7, unique=True, db_index=True)
+    slug = models.SlugField(default="", null=False, db_index=True)
     garage = models.CharField(max_length=255)
-    location = PlainLocationField(based_fields=['garage'],zoom=100)
+    location = PlainLocationField(based_fields=['garage'], zoom=100)
 
     # def save(self,*args, **kwargs):
     #     self.slug = slugify(self.model_name)
     #     super().save()
-    
+
     def __str__(self):
         return f"{self.model_name}"
+
 
 class InsuranceCompany(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=150)
-    contact = models.CharField(max_length=10,validators=[RegexValidator(regex='^[0-9]{9,10}$')])
+    contact = models.CharField(max_length=10, validators=[
+                               RegexValidator(regex='^[0-9]{9,10}$')])
 
     def __str__(self):
         return self.name
-    
+
     class Meta:
         verbose_name_plural = "Insurance companies"
 
+
 class InsurancePolicy(models.Model):
-    insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.CASCADE, related_name="company_polices")
-    vehicle = models.ForeignKey(Vehicle,on_delete=models.CASCADE,related_name='policy')
-    policy_code = models.IntegerField(max_length=20,unique=True)
+    insurance_company = models.ForeignKey(
+        InsuranceCompany, on_delete=models.CASCADE, related_name="company_polices")
+    vehicle = models.ForeignKey(
+        Vehicle, on_delete=models.CASCADE, related_name='policy')
+    policy_code = models.IntegerField(unique=True)
     insurance_started = models.DateField()
     insurance_expires = models.DateField()
 
@@ -76,4 +86,3 @@ class InsurancePolicy(models.Model):
 
     def __str__(self):
         return f"{self.insurance_company} - {self.vehicle}"
-    
