@@ -131,7 +131,8 @@ class RefuelsView(ListView):
         ctx = super().get_context_data(**kwargs)
         employee = self.request.session.get('employee_id')
         try:
-            ctx['refuels'] = Refuel.objects.get(employee=employee)
+            ctx['refuels'] = Employee.objects.get(
+                pk=employee).employee_refuels.all()
             return ctx
         except:
             ctx['refuels'] = None

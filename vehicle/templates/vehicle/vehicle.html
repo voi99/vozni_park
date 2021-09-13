@@ -39,7 +39,11 @@ Your Vehicle | {{vehicle.model_name}}
 
   {% for policy in vehicle.policy.all %}
     {% if forloop.last %}
+      {% if date.date > policy.insurance_expires %}
+      <p class="ps-2 lead text-danger">This vehicle is not registered!</p>
+      {% else %}
       {{policy.insurance_expires}}
+      {% endif %}
     {% endif %}
   {% endfor %}
 
